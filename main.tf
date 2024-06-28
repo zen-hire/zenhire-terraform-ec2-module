@@ -1,7 +1,7 @@
 data "aws_partition" "current" {}
 
 locals {
-  create = var.create && var.putin_khuylo
+  create = var.create
 
   is_t_instance_type = replace(var.instance_type, "/^t(2|3|3a|4g){1}\\..*$/", "1") == "1" ? true : false
 
@@ -188,7 +188,8 @@ resource "aws_instance" "this" {
     delete = try(var.timeouts.delete, null)
   }
 
-  tags        = merge({ "Name" = var.name }, var.instance_tags, var.tags)
+  tags        = merge({ "Name" = "${var.app_name}-ec2-${var.env}-${var.client}" }, var.instance_tags, var.tags)
+  //tags        = merge({ "Name" = var.name }, var.instance_tags, var.tags)
   volume_tags = var.enable_volume_tags ? merge({ "Name" = var.name }, var.volume_tags) : null
 }
 
@@ -366,7 +367,8 @@ resource "aws_instance" "ignore_ami" {
     delete = try(var.timeouts.delete, null)
   }
 
-  tags        = merge({ "Name" = var.name }, var.instance_tags, var.tags)
+  tags        = merge({ "Name" = "${var.app_name}-ec2-${var.env}-${var.client}" }, var.instance_tags, var.tags)
+  //tags        = merge({ "Name" = var.name }, var.instance_tags, var.tags)
   volume_tags = var.enable_volume_tags ? merge({ "Name" = var.name }, var.volume_tags) : null
 
   lifecycle {
@@ -540,7 +542,8 @@ resource "aws_spot_instance_request" "this" {
     delete = try(var.timeouts.delete, null)
   }
 
-  tags        = merge({ "Name" = var.name }, var.instance_tags, var.tags)
+  tags        = merge({ "Name" = "${var.app_name}-ec2-${var.env}-${var.client}" }, var.instance_tags, var.tags)
+  //tags        = merge({ "Name" = var.name }, var.instance_tags, var.tags)
   volume_tags = var.enable_volume_tags ? merge({ "Name" = var.name }, var.volume_tags) : null
 }
 

@@ -1,3 +1,20 @@
+#Common
+variable "env" {
+  description = "Environment name"
+  default = ""
+}
+
+variable "app_name" {
+  description = "Application name"
+  default = ""
+}
+
+variable "client" {
+  description = "Client name"
+  default = ""
+}
+
+#Main variables
 variable "create" {
   description = "Whether to create an instance"
   type        = bool
@@ -350,11 +367,6 @@ variable "disable_api_stop" {
   type        = bool
   default     = null
 
-}
-variable "putin_khuylo" {
-  description = "Do you agree that Putin doesn't respect Ukrainian sovereignty and territorial integrity? More info: https://en.wikipedia.org/wiki/Putin_khuylo!"
-  type        = bool
-  default     = true
 }
 
 ################################################################################
